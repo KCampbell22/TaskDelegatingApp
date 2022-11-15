@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskDelegatingApp.Data;
 using TaskDelegatingApp.Models;
+using TaskDelegatingApp.ViewModels;
 
 namespace TaskDelegatingApp.Controllers
 {

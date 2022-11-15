@@ -117,13 +117,15 @@ namespace TaskDelegatingApp.Migrations
 
             modelBuilder.Entity("TaskDelegatingApp.Models.Person", b =>
                 {
-                    b.HasOne("TaskDelegatingApp.Models.Day", null)
+                    b.HasOne("TaskDelegatingApp.Models.Day", "Day")
                         .WithMany("Persons")
                         .HasForeignKey("DayId");
 
                     b.HasOne("TaskDelegatingApp.Models.TaskItem", "TaskItem")
                         .WithMany("Person")
                         .HasForeignKey("TaskItemID");
+
+                    b.Navigation("Day");
 
                     b.Navigation("TaskItem");
                 });

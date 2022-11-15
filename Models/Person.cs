@@ -24,6 +24,7 @@ namespace TaskDelegatingApp.Models
         public bool AvailableSunday { get; set; }
 
         public virtual TaskItem TaskItem { get; set; }
+        public virtual Day Day { get; set; }    
 
 
         // Navigation properties

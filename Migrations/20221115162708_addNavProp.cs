@@ -5,7 +5,7 @@
 namespace TaskDelegatingApp.Migrations
 {
     /// <inheritdoc />
-    public partial class keyNond : Migration
+    public partial class addNavProp : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

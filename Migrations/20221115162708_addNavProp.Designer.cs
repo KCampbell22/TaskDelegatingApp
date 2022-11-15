@@ -12,8 +12,8 @@ using TaskDelegatingApp.Data;
 namespace TaskDelegatingApp.Migrations
 {
     [DbContext(typeof(TaskDelegatingAppContext))]
-    [Migration("20221115141541_keyNond")]
-    partial class keyNond
+    [Migration("20221115162708_addNavProp")]
+    partial class addNavProp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,13 +120,15 @@ namespace TaskDelegatingApp.Migrations
 
             modelBuilder.Entity("TaskDelegatingApp.Models.Person", b =>
                 {
-                    b.HasOne("TaskDelegatingApp.Models.Day", null)
+                    b.HasOne("TaskDelegatingApp.Models.Day", "Day")
                         .WithMany("Persons")
                         .HasForeignKey("DayId");
 
                     b.HasOne("TaskDelegatingApp.Models.TaskItem", "TaskItem")
                         .WithMany("Person")
                         .HasForeignKey("TaskItemID");
+
+                    b.Navigation("Day");
 
                     b.Navigation("TaskItem");
                 });
