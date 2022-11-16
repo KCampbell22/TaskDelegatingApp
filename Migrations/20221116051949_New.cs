@@ -5,7 +5,7 @@
 namespace TaskDelegatingApp.Migrations
 {
     /// <inheritdoc />
-    public partial class addNavProp : Migration
+    public partial class New : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,30 +23,6 @@ namespace TaskDelegatingApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaskItem",
-                columns: table => new
-                {
-                    TaskItemID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TimeofDay = table.Column<int>(type: "int", nullable: true),
-                    DayAssigned = table.Column<int>(type: "int", nullable: false),
-                    PersonId = table.Column<int>(type: "int", nullable: false),
-                    DayId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TaskItem", x => x.TaskItemID);
-                    table.ForeignKey(
-                        name: "FK_TaskItem_Day_DayId",
-                        column: x => x.DayId,
-                        principalTable: "Day",
-                        principalColumn: "DayId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Person",
                 columns: table => new
                 {
@@ -60,8 +36,7 @@ namespace TaskDelegatingApp.Migrations
                     AvailableFriday = table.Column<bool>(type: "bit", nullable: false),
                     AvailableSaturday = table.Column<bool>(type: "bit", nullable: false),
                     AvailableSunday = table.Column<bool>(type: "bit", nullable: false),
-                    TaskItemID = table.Column<int>(type: "int", nullable: true),
-                    DayId = table.Column<int>(type: "int", nullable: true)
+                    DayId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,12 +45,36 @@ namespace TaskDelegatingApp.Migrations
                         name: "FK_Person_Day_DayId",
                         column: x => x.DayId,
                         principalTable: "Day",
-                        principalColumn: "DayId");
+                        principalColumn: "DayId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TaskItem",
+                columns: table => new
+                {
+                    TaskItemID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TimeofDay = table.Column<int>(type: "int", nullable: false),
+                    DayId = table.Column<int>(type: "int", nullable: false),
+                    PersonID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskItem", x => x.TaskItemID);
                     table.ForeignKey(
-                        name: "FK_Person_TaskItem_TaskItemID",
-                        column: x => x.TaskItemID,
-                        principalTable: "TaskItem",
-                        principalColumn: "TaskItemID");
+                        name: "FK_TaskItem_Day_DayId",
+                        column: x => x.DayId,
+                        principalTable: "Day",
+                        principalColumn: "DayId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskItem_Person_PersonID",
+                        column: x => x.PersonID,
+                        principalTable: "Person",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -84,24 +83,24 @@ namespace TaskDelegatingApp.Migrations
                 column: "DayId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Person_TaskItemID",
-                table: "Person",
-                column: "TaskItemID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TaskItem_DayId",
                 table: "TaskItem",
                 column: "DayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskItem_PersonID",
+                table: "TaskItem",
+                column: "PersonID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "TaskItem");
 
             migrationBuilder.DropTable(
-                name: "TaskItem");
+                name: "Person");
 
             migrationBuilder.DropTable(
                 name: "Day");

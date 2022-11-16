@@ -61,7 +61,7 @@ namespace TaskDelegatingApp.Migrations
                     b.Property<bool>("AvailableWednsday")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("DayId")
+                    b.Property<int>("DayId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -70,14 +70,9 @@ namespace TaskDelegatingApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TaskItemID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("DayId");
-
-                    b.HasIndex("TaskItemID");
 
                     b.ToTable("Person");
                 });
@@ -90,9 +85,6 @@ namespace TaskDelegatingApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskItemID"));
 
-                    b.Property<int>("DayAssigned")
-                        .HasColumnType("int");
-
                     b.Property<int>("DayId")
                         .HasColumnType("int");
 
@@ -102,15 +94,17 @@ namespace TaskDelegatingApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
+                    b.Property<int?>("PersonID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TimeofDay")
+                    b.Property<int>("TimeofDay")
                         .HasColumnType("int");
 
                     b.HasKey("TaskItemID");
 
                     b.HasIndex("DayId");
+
+                    b.HasIndex("PersonID");
 
                     b.ToTable("TaskItem");
                 });
@@ -119,15 +113,11 @@ namespace TaskDelegatingApp.Migrations
                 {
                     b.HasOne("TaskDelegatingApp.Models.Day", "Day")
                         .WithMany("Persons")
-                        .HasForeignKey("DayId");
-
-                    b.HasOne("TaskDelegatingApp.Models.TaskItem", "TaskItem")
-                        .WithMany("Person")
-                        .HasForeignKey("TaskItemID");
+                        .HasForeignKey("DayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Day");
-
-                    b.Navigation("TaskItem");
                 });
 
             modelBuilder.Entity("TaskDelegatingApp.Models.TaskItem", b =>
@@ -138,7 +128,13 @@ namespace TaskDelegatingApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TaskDelegatingApp.Models.Person", "Person")
+                        .WithMany("TaskItem")
+                        .HasForeignKey("PersonID");
+
                     b.Navigation("Day");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("TaskDelegatingApp.Models.Day", b =>
@@ -148,9 +144,9 @@ namespace TaskDelegatingApp.Migrations
                     b.Navigation("TaskItems");
                 });
 
-            modelBuilder.Entity("TaskDelegatingApp.Models.TaskItem", b =>
+            modelBuilder.Entity("TaskDelegatingApp.Models.Person", b =>
                 {
-                    b.Navigation("Person");
+                    b.Navigation("TaskItem");
                 });
 #pragma warning restore 612, 618
         }
