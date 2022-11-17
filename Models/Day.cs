@@ -7,15 +7,19 @@ namespace TaskDelegatingApp.Models
 
     public partial class Day
     {
+        
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DayId { get; set; }  
         public string? DayName { get; set; }
-       
 
-        public virtual ICollection<TaskItem>? TaskItems { get; set; }
-        public virtual ICollection<Person>? Persons { get; set; }
+        public virtual ICollection<TaskItem> TaskItems { get; set; }
+        public virtual ICollection<Person> People { get; set; }
      
-
+        public Day()
+        {
+            TaskItems = new HashSet<TaskItem>();
+            People = new HashSet<Person>();
+        }
        
 
         

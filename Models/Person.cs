@@ -22,13 +22,15 @@ namespace TaskDelegatingApp.Models
         public bool AvailableFriday { get; set; }
         public bool AvailableSaturday { get; set; } 
         public bool AvailableSunday { get; set; }
-        public int TaskItemId;
         public int DayId { get; set; }
+        public virtual Day Day { get; set; }
 
-        public virtual ICollection<TaskItem> TaskItem { get; set; }
-        public virtual Day Day { get; set; }    
+        public virtual ICollection<TaskItem> TaskItems { get; set; }
 
-
+        public Person()
+        {
+            TaskItems = new HashSet<TaskItem>();   
+        }
         // Navigation properties
        
         

@@ -5,7 +5,7 @@
 namespace TaskDelegatingApp.Migrations
 {
     /// <inheritdoc />
-    public partial class New : Migration
+    public partial class PersonID22 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
