@@ -7,6 +7,8 @@
     <UserSecretsId>4efbf909-2ac4-4ab7-b076-b83428d2c98b</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <Compile Remove="Models\SeedData.cs" />
   </ItemGroup>
