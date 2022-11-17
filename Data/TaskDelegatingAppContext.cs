@@ -8,7 +8,8 @@ namespace TaskDelegatingApp.Data
     {
         public TaskDelegatingAppContext(DbContextOptions<TaskDelegatingAppContext> options)
             : base(options)
-        { }
+        {
+        }
 
         public DbSet<Person> Person { get; set; }
 

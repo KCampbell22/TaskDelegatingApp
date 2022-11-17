@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskDelegatingApp.Data;
 using TaskDelegatingApp.Models;
+using TaskDelegatingApp.ViewModels;
 
 namespace TaskDelegatingApp.Controllers
 {
@@ -22,7 +23,8 @@ namespace TaskDelegatingApp.Controllers
         // GET: TaskItems
         public async Task<IActionResult> Index()
         {
-            var taskDelegatingAppContext = _context.TaskItem.Include(t => t.Day);
+            Week Tasks = new Week();
+            Tasks.Tasks = _context.
             return View(await taskDelegatingAppContext.ToListAsync());
         }
 
@@ -49,6 +51,7 @@ namespace TaskDelegatingApp.Controllers
         public IActionResult Create()
         {
             ViewData["DayId"] = new SelectList(_context.Day, "DayId", "DayId");
+            ViewData["PersonId"] = new SelectList(_context.Person, "PersonId", "PersonId");
             return View();
         }
 

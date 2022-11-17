@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskDelegatingApp.Data;
 using TaskDelegatingApp.Models;
+using TaskDelegatingApp.ViewModels;
 
 namespace TaskDelegatingApp.Controllers
 {
@@ -20,10 +21,11 @@ namespace TaskDelegatingApp.Controllers
         }
 
         // GET: People
-        public async Task<IActionResult> Index()
+        public  Task<IActionResult> Index()
         {
-            var taskDelegatingAppContext = _context.Person.Include(p => p.Day);
-            return View(await taskDelegatingAppContext.ToListAsync());
+            Week vm = new Week();
+            vm.People = _context.Person.Include(e => e.Day).ThenInclude(e => e.TaskItems.Select(e => e.Person)).ToList();
+            return View(vm);
         }
 
         // GET: People/Details/5

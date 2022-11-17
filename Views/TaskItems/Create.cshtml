@@ -32,6 +32,10 @@
                 <select asp-for="DayId" class ="form-control" asp-items="ViewBag.DayId"></select>
             </div>
             <div class="form-group">
+                <label asp-for="PersonID" class="control-Label"></label>
+                <select asp-for="PersonID" class="form-control" asp-items="ViewBag.PersonId" />
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
