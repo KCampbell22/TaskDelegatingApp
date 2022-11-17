@@ -21,10 +21,12 @@ namespace TaskDelegatingApp.Controllers
         }
 
         // GET: TaskItems
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            var Tasks = _context.TaskItem.Include(e => e.Day).Include(e => e.Person).AsNoTracking();
-            return View(await Tasks.ToListAsync());
+            
+                var taskItems = _context.TaskItem.ToList();
+            
+                return View(taskItems);
         }
 
         // GET: TaskItems/Details/5
