@@ -9,22 +9,25 @@ using TaskDelegatingApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-        builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+{
+    builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("TasdDelegatingAppProduction")));
-    else
-        builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDelegatingAppContext") ?? throw new InvalidOperationException("Connection string 'TaskDelegatingAppContext' not found.")));
+}
+else
+{
+    builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDelegatingAppContext") ?? throw new InvalidOperationException("Connection string 'TaskDelegatingAppContext' not found.")));
+}
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-/*
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     SeedData.Initialize(services);
 }
-*/
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

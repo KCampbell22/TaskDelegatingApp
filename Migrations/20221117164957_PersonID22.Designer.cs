@@ -12,8 +12,8 @@ using TaskDelegatingApp.Data;
 namespace TaskDelegatingApp.Migrations
 {
     [DbContext(typeof(TaskDelegatingAppContext))]
-    [Migration("20221116051949_New")]
-    partial class New
+    [Migration("20221117164957_PersonID22")]
+    partial class PersonID22
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,7 +115,7 @@ namespace TaskDelegatingApp.Migrations
             modelBuilder.Entity("TaskDelegatingApp.Models.Person", b =>
                 {
                     b.HasOne("TaskDelegatingApp.Models.Day", "Day")
-                        .WithMany("Persons")
+                        .WithMany("People")
                         .HasForeignKey("DayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -132,7 +132,7 @@ namespace TaskDelegatingApp.Migrations
                         .IsRequired();
 
                     b.HasOne("TaskDelegatingApp.Models.Person", "Person")
-                        .WithMany("TaskItem")
+                        .WithMany("TaskItems")
                         .HasForeignKey("PersonID");
 
                     b.Navigation("Day");
@@ -142,14 +142,14 @@ namespace TaskDelegatingApp.Migrations
 
             modelBuilder.Entity("TaskDelegatingApp.Models.Day", b =>
                 {
-                    b.Navigation("Persons");
+                    b.Navigation("People");
 
                     b.Navigation("TaskItems");
                 });
 
             modelBuilder.Entity("TaskDelegatingApp.Models.Person", b =>
                 {
-                    b.Navigation("TaskItem");
+                    b.Navigation("TaskItems");
                 });
 #pragma warning restore 612, 618
         }

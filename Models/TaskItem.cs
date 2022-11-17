@@ -15,9 +15,10 @@ namespace TaskDelegatingApp.Models
         public string Description { get; set; }
         public int TimeofDay { get; set; }
         public int DayId { get; set; }
-
         public virtual Day Day { get; set; }
+
         public virtual Person Person { get; set; }
+        
 
 
 

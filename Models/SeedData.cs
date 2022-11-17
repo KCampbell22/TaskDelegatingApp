@@ -1,9 +1,8 @@
 ﻿
-/*
+
 using global::TaskDelegatingApp.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using TaskDelegatingApp.Data;
 namespace TaskDelegatingApp.Models
 {
     public class SeedData
@@ -42,4 +41,3 @@ namespace TaskDelegatingApp.Models
     }
 }
 
-*/
