@@ -10,6 +10,12 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <Compile Remove="Views\Tasks\**" />
+    <Content Remove="Views\Tasks\**" />
+    <EmbeddedResource Remove="Views\Tasks\**" />
+    <None Remove="Views\Tasks\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="Models\SeedData.cs" />
   </ItemGroup>
 
@@ -91,6 +97,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

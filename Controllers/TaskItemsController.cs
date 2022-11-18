@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskDelegatingApp.Data;
 using TaskDelegatingApp.Models;
-using TaskDelegatingApp.ViewModels;
 
 namespace TaskDelegatingApp.Controllers
 {
@@ -21,12 +20,10 @@ namespace TaskDelegatingApp.Controllers
         }
 
         // GET: TaskItems
-        public  IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-                var taskItems = _context.TaskItem.ToList();
-            
-                return View(taskItems);
+            var taskDelegatingAppContext = _context.TaskItem.Include(t => t.Day);
+            return View(await taskDelegatingAppContext.ToListAsync());
         }
 
         // GET: TaskItems/Details/5
@@ -51,8 +48,7 @@ namespace TaskDelegatingApp.Controllers
         // GET: TaskItems/Create
         public IActionResult Create()
         {
-            ViewData["DayId"] = new SelectList(_context.Day, "DayId", "DayId");
-            ViewData["PersonId"] = new SelectList(_context.Person, "PersonId", "PersonId");
+            ViewData["DayID"] = new SelectList(_context.Day, "DayID", "DayID");
             return View();
         }
 
@@ -61,7 +57,7 @@ namespace TaskDelegatingApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaskItemID,Name,Description,TimeofDay,DayId")] TaskItem taskItem)
+        public async Task<IActionResult> Create([Bind("TaskItemID,TaskName,TaskDescription,TimeOfDay,DayID")] TaskItem taskItem)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +65,7 @@ namespace TaskDelegatingApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DayId"] = new SelectList(_context.Day, "DayId", "DayId", taskItem.DayId);
+            ViewData["DayID"] = new SelectList(_context.Day, "DayID", "DayID", taskItem.DayID);
             return View(taskItem);
         }
 
@@ -86,7 +82,7 @@ namespace TaskDelegatingApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["DayId"] = new SelectList(_context.Day, "DayId", "DayId", taskItem.DayId);
+            ViewData["DayID"] = new SelectList(_context.Day, "DayID", "DayID", taskItem.DayID);
             return View(taskItem);
         }
 
@@ -95,7 +91,7 @@ namespace TaskDelegatingApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaskItemID,Name,Description,TimeofDay,DayId")] TaskItem taskItem)
+        public async Task<IActionResult> Edit(int id, [Bind("TaskItemID,TaskName,TaskDescription,TimeOfDay,DayID")] TaskItem taskItem)
         {
             if (id != taskItem.TaskItemID)
             {
@@ -122,7 +118,7 @@ namespace TaskDelegatingApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DayId"] = new SelectList(_context.Day, "DayId", "DayId", taskItem.DayId);
+            ViewData["DayID"] = new SelectList(_context.Day, "DayID", "DayID", taskItem.DayID);
             return View(taskItem);
         }
 

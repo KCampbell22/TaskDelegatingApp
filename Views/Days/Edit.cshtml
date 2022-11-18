@@ -12,11 +12,16 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="DayId" />
+            <input type="hidden" asp-for="DayID" />
             <div class="form-group">
                 <label asp-for="DayName" class="control-label"></label>
                 <input asp-for="DayName" class="form-control" />
                 <span asp-validation-for="DayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayDescription" class="control-label"></label>
+                <input asp-for="DayDescription" class="form-control" />
+                <span asp-validation-for="DayDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

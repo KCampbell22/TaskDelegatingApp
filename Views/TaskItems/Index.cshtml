@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TaskDelegatingApp.Models.TaskItem>
 
 @{
-    ViewData["Title"] = "Tasks";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Tasks</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TaskItemID)
+                @Html.DisplayNameFor(model => model.TaskName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.TaskDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TimeofDay)
+                @Html.DisplayNameFor(model => model.TimeOfDay)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Day)
@@ -34,22 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TaskItemID)
+                @Html.DisplayFor(modelItem => item.TaskName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.TaskDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.TimeOfDay)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TimeofDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day.DayId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day.DayName)
+                @Html.DisplayFor(modelItem => item.Day.DayID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TaskItemID">Edit</a> |

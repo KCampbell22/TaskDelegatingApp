@@ -1,34 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using TaskDelegatingApp.Migrations;
-#nullable disable
-namespace TaskDelegatingApp.Models
+﻿namespace TaskDelegatingApp.Models
 {
     public class TaskItem
     {
-        //hidden id property
+        private string taskDescription;
+        private string taskName;
 
         public int TaskItemID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int TimeofDay { get; set; }
-        public int DayId { get; set; }
-        public virtual Day Day { get; set; }
+        public string TaskName { get => taskName; set => taskName = value; }
+        public string TaskDescription { get => taskDescription; set => taskDescription = value; }
+        public int TimeOfDay { get; set; }
 
-        public int PersonID {get; set;}
-        public virtual Person Person { get; set; }
+        public virtual ICollection<Day> Days { get; set; }
+
+        public virtual ICollection<Person> Persons { get; set; }
         
 
+        public TaskItem()
+        {
+            Persons = new HashSet<Person>();
+            Days = new HashSet<Day>();
 
 
-
-      
-       
-
-
+        }
     }
 }
-

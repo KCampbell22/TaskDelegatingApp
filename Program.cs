@@ -8,6 +8,10 @@ using TaskDelegatingApp.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDelegatingAppContext") ?? throw new InvalidOperationException("Connection string 'TaskDelegatingAppContext' not found.")));
+builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDelegatingAppContext") ?? throw new InvalidOperationException("Connection string 'TaskDelegatingAppContext' not found.")));
 
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
 {
@@ -19,6 +23,7 @@ else
     builder.Services.AddDbContext<TaskDelegatingAppContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDelegatingAppContext") ?? throw new InvalidOperationException("Connection string 'TaskDelegatingAppContext' not found.")));
 }
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

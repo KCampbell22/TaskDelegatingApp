@@ -36,7 +36,7 @@ namespace TaskDelegatingApp.Controllers
             }
 
             var day = await _context.Day
-                .FirstOrDefaultAsync(m => m.DayId == id);
+                .FirstOrDefaultAsync(m => m.DayID == id);
             if (day == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace TaskDelegatingApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DayId,DayName")] Day day)
+        public async Task<IActionResult> Create([Bind("DayID,DayName,DayDescription")] Day day)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +88,9 @@ namespace TaskDelegatingApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DayId,DayName")] Day day)
+        public async Task<IActionResult> Edit(int id, [Bind("DayID,DayName,DayDescription")] Day day)
         {
-            if (id != day.DayId)
+            if (id != day.DayID)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace TaskDelegatingApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DayExists(day.DayId))
+                    if (!DayExists(day.DayID))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace TaskDelegatingApp.Controllers
             }
 
             var day = await _context.Day
-                .FirstOrDefaultAsync(m => m.DayId == id);
+                .FirstOrDefaultAsync(m => m.DayID == id);
             if (day == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace TaskDelegatingApp.Controllers
 
         private bool DayExists(int id)
         {
-          return (_context.Day?.Any(e => e.DayId == id)).GetValueOrDefault();
+          return (_context.Day?.Any(e => e.DayID == id)).GetValueOrDefault();
         }
     }
 }

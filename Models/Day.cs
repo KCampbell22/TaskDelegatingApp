@@ -1,31 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TaskDelegatingApp.Models
+﻿namespace TaskDelegatingApp.Models
 {
-    
-
-    public partial class Day
+    public class Day
     {
-        
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int DayId { get; set; }  
-        public string? DayName { get; set; }
+       
+
+        public int DayID { get; set; }
+        private string dayName;
+        private string dayDescription;
+        public string DayName { get => dayName; set => dayName = value; }
+        public string DayDescription { get => dayDescription; set => dayDescription = value; }
 
         public virtual ICollection<TaskItem> TaskItems { get; set; }
-        public virtual ICollection<Person> People { get; set; }
-     
+        public virtual ICollection<Person> Persons { get; set; }
+
+
+        public int WeekID { get; set; }
+        public virtual Week Week { get; set; }
+
+
+
         public Day()
         {
             TaskItems = new HashSet<TaskItem>();
-            People = new HashSet<Person>();
+            Persons = new HashSet<Person>();
+            dayName = DayName;
+            dayDescription = DayDescription;
         }
-       
-
-        
-
     }
-
-
-    
 }

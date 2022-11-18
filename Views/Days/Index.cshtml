@@ -15,6 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.DayName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayDescription)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -25,9 +28,12 @@
                 @Html.DisplayFor(modelItem => item.DayName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DayId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DayId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DayId">Delete</a>
+                @Html.DisplayFor(modelItem => item.DayDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DayID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DayID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DayID">Delete</a>
             </td>
         </tr>
 }
