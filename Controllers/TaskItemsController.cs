@@ -22,8 +22,15 @@ namespace TaskDelegatingApp.Controllers
         // GET: TaskItems
         public async Task<IActionResult> Index()
         {
+<<<<<<< Updated upstream
             var taskDelegatingAppContext = _context.TaskItem.Include(t => t.Day);
             return View(await taskDelegatingAppContext.ToListAsync());
+=======
+
+            var taskItems = _context.TaskItem.Include(e => e.Person).Include(e => e.Day);
+            
+                return View(await taskItems.ToListAsync());
+>>>>>>> Stashed changes
         }
 
         // GET: TaskItems/Details/5

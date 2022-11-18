@@ -2,16 +2,14 @@
 {
     public class TaskItem
     {
-        private string taskDescription;
-        private string taskName;
 
         public int TaskItemID { get; set; }
-        public string TaskName { get => taskName; set => taskName = value; }
-        public string TaskDescription { get => taskDescription; set => taskDescription = value; }
         public int TimeOfDay { get; set; }
+        public string? TaskName { get; set; }
+        public string? TaskDescription { get; set; }
+
 
         public virtual ICollection<Day> Days { get; set; }
-
         public virtual ICollection<Person> Persons { get; set; }
         
 

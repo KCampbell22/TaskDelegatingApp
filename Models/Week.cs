@@ -7,7 +7,7 @@ namespace TaskDelegatingApp.Models
     public class Week
     {
         
-        
+        public int ID { get; set; }
         public DateTime WeekStart { get; set; }
         public DateTime WeekEnd { get; set; }
         

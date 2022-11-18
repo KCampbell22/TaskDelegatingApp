@@ -2,12 +2,11 @@
 {
     public class Person
     {
-        private string name;
-        private string email;
+        
 
         public int PersonID { get; set; }
-        public string Name { get => name; set => name = value; }
-        public string Email { get => email; set => email = value; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
         public bool Monday { get; set; }
         public bool Tuesday { get; set; }
         public bool Wednesday { get; set; }
